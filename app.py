@@ -23,10 +23,19 @@ pd_app.sidebar.header("🕹️ Control Panels")
 uploaded_file = pd_app.sidebar.file_uploader("Upload Evaluation CSV Data", type=["csv"])
 
 # 2. Model Selection Dropdown
-chosen_algorithm = pd_app.sidebar.selectbox(
+display_names = {
+    "Logistic Regression": "Logistic_Regression",
+    "Decision Tree": "Decision_Tree",
+    "KNN Classifier": "KNN",
+    "Naive Bayes": "Naive_Bayes",
+    "Support Vector Machine": "Support_Vector_Machine"
+}
+
+selected_ui_name = pd_app.sidebar.selectbox(
     "Select Classifier Model",
-    ["Logistic_Regression", "Decision_Tree", "KNN", "Naive_Bayes", "Support_Vector_Machine"]
+    list(display_names.keys())
 )
+chosen_algorithm = display_names[selected_ui_name]
 
 # Helper function to load model elements securely
 def get_model_files(algo_name):
@@ -42,7 +51,7 @@ def get_model_files(algo_name):
 
 if uploaded_file is not None:
     try:
-        # Load the user-submitted dataset
+        # Loading the user-submitted dataset
         evaluation_data = pd.read_csv(uploaded_file)
         
         # Verification check to see if target column exists
@@ -50,22 +59,22 @@ if uploaded_file is not None:
         if target_col not in evaluation_data.columns:
             pd_app.error(f"Missing ground truth tracking field: '{target_col}' in uploaded file.")
         else:
-            # Display uploaded framework metrics slice
+            # Displaying uploaded framework metrics slice
             pd_app.subheader("🔍 Sample of Uploaded Data Matrix")
             pd_app.dataframe(evaluation_data.head(6))
             
-            # Split features and target labels
+            # Splitting features and target labels
             X_eval = evaluation_data.drop(columns=[target_col])
             y_eval = evaluation_data[target_col]
             
-            # Fetch backend model architectures
+            # Fetching backend model architectures
             scaler, classifier = get_model_files(chosen_algorithm)
             
             if classifier is not None:
-                # Transform variables via pre-fitted scaler structure
+                # Transforming variables via pre-fitted scaler structure
                 X_eval_scaled = scaler.transform(X_eval)
                 
-                # Perform pure feed-forward evaluations without retraining models
+                # Performing pure feed-forward evaluations without retraining models
                 predicted_labels = classifier.predict(X_eval_scaled)
                 predicted_probs = classifier.predict_proba(X_eval_scaled)[:, 1]
                 
