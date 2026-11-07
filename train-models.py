@@ -20,14 +20,14 @@ from sklearn.metrics import (
 )
 
 def build_and_save_pipeline():
-    # Load dataset from source
+    # Loading dataset from source
     raw_data = load_breast_cancer(as_frame=True)
     df = raw_data.frame
     
-    # Rename target for clear user tracking
+    # Renaming target for clear user tracking
     df = df.rename(columns={'target': 'diagnosis_target'})
     
-    # Extract features and targets
+    # Extracting features and targets
     X = df.drop(columns=['diagnosis_target'])
     y = df['diagnosis_target']
     
@@ -36,22 +36,22 @@ def build_and_save_pipeline():
         X, y, test_size=0.25, random_state=2027, stratify=y
     )
     
-    # Save the test data to a CSV for streamlit upload verification
+    # Saving the test data to a CSV for streamlit upload verification
     test_df = X_test.copy()
     test_df['diagnosis_target'] = y_test
     test_df.to_csv('test_data.csv', index=False)
     print("Saved 'test_data.csv' successfully.")
     
-    # Preprocessing: Scale features to help SVM, KNN, and Logistic Regression converge cleanly
+    # Preprocessing: Scaling features to help SVM, KNN, and Logistic Regression converge cleanly
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
     
-    # Ensure model export folder exists
+    # Ensuring model export folder exists
     os.makedirs('model', exist_ok=True)
     joblib.dump(scaler, 'model/feature_scaler.pkl')
     
-    # Initialize classifiers with non-default configs where suitable to show human choice
+    # Initializing classifiers with non-default configs where suitable to show human choice
     model_suite = {
         'Logistic_Regression': LogisticRegression(max_iter=500, solver='saga', random_state=42),
         'Decision_Tree': DecisionTreeClassifier(max_depth=5, criterion='entropy', random_state=42),
@@ -63,17 +63,17 @@ def build_and_save_pipeline():
     metrics_tracker = []
     
     for label, estimator in model_suite.items():
-        # Train
+        # Training
         estimator.fit(X_train_scaled, y_train)
         
-        # Save model object
+        # Saving model object
         joblib.dump(estimator, f'model/{label}_classifier.pkl')
         
-        # Run predictions
+        # Running predictions
         predictions = estimator.predict(X_test_scaled)
         probabilities = estimator.predict_proba(X_test_scaled)[:, 1]
         
-        # Calculate metric profiles
+        # Calculating metric profiles
         acc = accuracy_score(y_test, predictions)
         auc = roc_auc_score(y_test, probabilities)
         prec = precision_score(y_test, predictions)
