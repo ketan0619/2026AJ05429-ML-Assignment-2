@@ -89,6 +89,7 @@ if uploaded_file is not None:
                 metric_slots[5].metric("MCC Score", f"{mcc:.4f}")
                 
                 # Analysis splits: Reports vs Matrix Plots
+                col_left, col_right = pd_app.columns(2)
                 with col_left:
                       pd_app.subheader("📋 Class-Wise Performance Report")
     
