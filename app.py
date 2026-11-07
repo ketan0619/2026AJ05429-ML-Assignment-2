@@ -89,12 +89,23 @@ if uploaded_file is not None:
                 metric_slots[5].metric("MCC Score", f"{mcc:.4f}")
                 
                 # Analysis splits: Reports vs Matrix Plots
-                col_left, col_right = pd_app.columns(2)
-                
                 with col_left:
-                    pd_app.subheader("📋 Detailed Classification Summary Profile")
-                    text_report = classification_report(y_eval, predicted_labels, target_names=["Benign", "Malignant"])
-                    pd_app.text_area("Metrics Distribution breakdown", text_report, height=220)
+                      pd_app.subheader("📋 Class-Wise Performance Report")
+    
+                      report_dict = classification_report(
+                            y_eval, predicted_labels, 
+                            target_names=["Benign", "Malignant"], 
+                            output_dict=True
+                      )
+  
+                      report_df = pd.DataFrame(report_dict).transpose().round(2)
+  
+                      report_df.columns = ["Precision", "Recall", "F1-Score", "Support"]
+
+                      report_df["Support"] = report_df["Support"].astype(int)
+  
+                      pd_app.dataframe(report_df, use_container_width=True)
+
                     
                 with col_right:
                     pd_app.subheader("🧱 Confusion Matrix Blueprint Mapping")
