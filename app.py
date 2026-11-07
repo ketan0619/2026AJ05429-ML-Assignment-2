@@ -13,7 +13,7 @@ from sklearn.metrics import (
 
 # App Title & Context Setup
 pd_app.set_page_config(page_title="M.Tech AIML: ML Assignment-2 Deployment Hub", layout="wide")
-pd_app.title("📊🩺  Diagnostic Classification & Performance Diagnostics Dashboard")
+pd_app.title("📊🩺 Breast Cancer Classification & Evaluation Dashboard")
 pd_app.markdown("### Machine Learning - Assignment 2 (2026aj05429)")
 
 # Sidebar for controls
