@@ -12,9 +12,9 @@ from sklearn.metrics import (
 )
 
 # App Title & Context Setup
-pd_app.set_page_config(page_title="M.Tech AIML Deployment Hub", layout="wide")
-pd_app.title("📊 Diagnostic Classification & Performance Diagnostics Dashboard")
-pd_app.markdown("### Machine Learning - Assignment 2 (Work Integrated Learning Programmes)")
+pd_app.set_page_config(page_title="M.Tech AIML: ML Assignment-2 Deployment Hub", layout="wide")
+pd_app.title("📊🩺  Diagnostic Classification & Performance Diagnostics Dashboard")
+pd_app.markdown("### Machine Learning - Assignment 2 (2026aj05429)")
 
 # Sidebar for controls
 pd_app.sidebar.header("🕹️ Control Panels")
@@ -101,7 +101,7 @@ if uploaded_file is not None:
                     conf_mat = confusion_matrix(y_eval, predicted_labels)
                     
                     fig, ax = plt.subplots(figsize=(4, 3.5))
-                    sns.heatmap(conf_mat, annot=True, fmt="d", cmap="Blues", 
+                    sns.heatmap(conf_mat, annot=True, fmt="d", cmap="Purples", 
                                 xticklabels=["Benign", "Malignant"], yticklabels=["Benign", "Malignant"], ax=ax, cbar=False)
                     plt.ylabel('Actual Label Class')
                     plt.xlabel('Model Predicted Class')
