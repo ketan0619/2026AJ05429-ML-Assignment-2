@@ -45,10 +45,7 @@ The goal of this project is to build a machine learning pipeline that can classi
 | **KNN Classifier:** | Performed exceptionally well with 98.60% accuracy and an AUC of 0.9998. Using n_neighbors=7 along with distance weighting worked perfectly for this geometry, keeping false positives and false negatives very low (both precision and recall are at 98.89%). |
 | **Naive Bayes:** | Got a solid 96.50% accuracy and 0.9950 AUC. Even though it assumes all 30 features are completely independent (which isn't strictly true for things like cell radius and perimeter), it still gave a highly reliable and fast classification. |
 | **Support Vector Machine (SVM):** | Like Logistic Regression, the SVM model scored a perfect 1.00 on this test split. The RBF kernel mapped the scaled continuous features perfectly. The lab environment gave a future warning about the probability parameter being deprecated in newer scikit-learn versions, but the model still saved and serialized correctly. |
+| **Overall Winner for my Dataset:** | The top models are Logistic Regression and SVM, since both achieved a flawless 1.00 score on the test set. For the final deployment choice, I am selecting Logistic Regression as the winner. Even though the predictions match SVM exactly, Logistic Regression is computationally lighter, uses less memory, and processes requests faster inside the Streamlit app. It also provides highly clear feature weights, making it much easier to interpret from a medical standpoint than a complex SVM hyperplane. |
 
 
-### Overall Winner for the Dataset
-The top models are Logistic Regression and SVM, since both achieved a flawless 1.00 score on the test set.
-
-For the final deployment choice, I am selecting Logistic Regression as the winner. Even though the predictions match SVM exactly, Logistic Regression is computationally lighter, uses less memory, and processes requests faster inside the Streamlit app. It also provides highly clear feature weights, making it much easier to interpret from a medical standpoint than a complex SVM hyperplane.
 
