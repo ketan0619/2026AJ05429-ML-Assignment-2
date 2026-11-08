@@ -71,14 +71,14 @@ if uploaded_file is not None:
             scaler, classifier = get_model_files(chosen_algorithm)
             
             if classifier is not None:
-                # Transforming variables via pre-fitted scaler structure
+                # Preprocess features using the loaded scaler
                 X_eval_scaled = scaler.transform(X_eval)
                 
-                # Performing pure feed-forward evaluations without retraining models
+                # Model inference without retraining
                 predicted_labels = classifier.predict(X_eval_scaled)
                 predicted_probs = classifier.predict_proba(X_eval_scaled)[:, 1]
                 
-                # Metric Assessments
+                # Metric Calculations
                 acc = accuracy_score(y_eval, predicted_labels)
                 auc = roc_auc_score(y_eval, predicted_probs)
                 prec = precision_score(y_eval, predicted_labels)
@@ -86,7 +86,7 @@ if uploaded_file is not None:
                 f1 = f1_score(y_eval, predicted_labels)
                 mcc = matthews_corrcoef(y_eval, predicted_labels)
                 
-                # Presentation Layout Structures
+                # Displaying Results
                 pd_app.markdown(f"## ⚙️ Performance Framework: **{chosen_algorithm.replace('_', ' ')}**")
                 
                 metric_slots = pd_app.columns(6)
