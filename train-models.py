@@ -51,7 +51,7 @@ def build_and_save_pipeline():
     os.makedirs('model', exist_ok=True)
     joblib.dump(scaler, 'model/feature_scaler.pkl')
     
-    # Initializing classifiers with non-default configs where suitable to show human choice
+    # Initializing the 5 required models with custom parameters
     model_suite = {
         'Logistic_Regression': LogisticRegression(max_iter=500, solver='saga', random_state=42),
         'Decision_Tree': DecisionTreeClassifier(max_depth=5, criterion='entropy', random_state=42),
