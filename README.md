@@ -24,9 +24,9 @@ The goal of this project is to build a machine learning pipeline that can classi
 
 ---
 
-## d. Model Evaluation Metric Profiles
+## d. Models Used
 
-### Model Suite Performance Summary
+### Model Evaluation Metrics
 
 | ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
