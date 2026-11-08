@@ -19,7 +19,7 @@ The goal of this project is to build a machine learning pipeline that can classi
 * **Target Variable:** Binary classification column named diagnosis_target (where 0 means Benign and 1 means Malignant).
 
 ## c. GitHub Repository Link
-* **Codebase Home:** `https://github.com/ketan0619/2026AJ05429-ML-Assignment-2.git`
+* **Repo Link:** `https://github.com/ketan0619/2026AJ05429-ML-Assignment-2.git`
 * **Live Streamlit App:** `https://2026aj05429-ml-assignment-2-upjmb34jz4diye4eyhds9a.streamlit.app/`
 
 ---
